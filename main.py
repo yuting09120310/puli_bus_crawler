@@ -13,7 +13,10 @@ else:
     num = list[0]
 
 #資料來源位置
-url = 'https://www.taiwanbus.tw/eBUSPage/Query/ws/getRData.ashx?type=4&key=' + num +'01'
+if(num.isdigit()):
+    url = 'https://www.taiwanbus.tw/eBUSPage/Query/ws/getRData.ashx?type=4&key=' + num +'01'
+else:
+    url = 'https://www.taiwanbus.tw/eBUSPage/Query/ws/getRData.ashx?type=4&key=' + num +'1'
 
 #資料回傳
 response = request('get', url)
@@ -30,7 +33,7 @@ item = data['data']
 if (len(list) > 1):
     for i in item:
         if station == i['na']:
-            print(i['na'],i['ptime'])
+            print(i['na'],i['ptime'],"車號:",i['car'])
 else:
     for i in item:
         print(i['na'],i['ptime'])
